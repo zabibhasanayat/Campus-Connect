@@ -12,10 +12,34 @@ class Student extends Controller {
 
 
     public function index() {
-        $resources = $this->resourceModel->getResources();
-        $data = ['resources' => $resources];
-        $this->view('student/index', $data);
+    $userId = $_SESSION['user_id'];
+    
+    // Get all resources
+    $resources = $this->resourceModel->getResources();
+    
+    // Get user's booking statistics
+    $stats = $this->bookingModel->getUserBookingStats($userId);
+    
+    // Count available resources
+    $availableCount = 0;
+    if($resources) {
+        foreach($resources as $resource) {
+            if($resource->available_capacity > 0) {
+                $availableCount++;
+            }
+        }
     }
+    
+    $data = [
+        'resources' => $resources,
+        'total_bookings' => $stats->total ?? 0,
+        'pending_bookings' => $stats->pending ?? 0,
+        'approved_bookings' => $stats->approved ?? 0,
+        'available_resources' => $availableCount
+    ];
+    
+    $this->view('student/index', $data);
+}
 
 
     // NEW: Advanced Search Page

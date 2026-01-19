@@ -22,6 +22,7 @@ class BookingModel {
     }
     // Add this method to your existing BookingModel.php
 
+    
 public function getUserBookingCount($userId) {
     $this->db->query('SELECT COUNT(*) as count FROM bookings WHERE user_id = :user_id');
     $this->db->bind(':user_id', $userId);
