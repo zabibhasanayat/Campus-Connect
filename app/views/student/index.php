@@ -364,6 +364,13 @@
                 <span>Favorites</span>
             </a>
         </li>
+
+        <li>
+            <a href="<?php echo URLROOT; ?>/student/search" class="sidebar-link">
+                <i class="bi bi-star-fill"></i>
+                <span>Advanced Search</span>
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-divider"></div>

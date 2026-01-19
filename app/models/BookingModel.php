@@ -20,6 +20,15 @@ class BookingModel {
         
         return $this->db->execute();
     }
+    // Add this method to your existing BookingModel.php
+
+public function getUserBookingCount($userId) {
+    $this->db->query('SELECT COUNT(*) as count FROM bookings WHERE user_id = :user_id');
+    $this->db->bind(':user_id', $userId);
+    $result = $this->db->single();
+    return $result ? $result->count : 0;
+}
+
 
     // Get all bookings for a specific logged-in user
     public function getUserBookings($userId) {
